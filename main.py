@@ -1,4 +1,10 @@
 from fastapi import FastAPI
+from enum import Enum
+
+class Names(str, Enum):
+    ivan = 'ivan'
+    katya = 'katya'
+    kostya = 'kostya'
 
 app = FastAPI()
 
