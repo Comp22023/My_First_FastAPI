@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from enum import Enum
+from pydantic import BaseModel
 
 class Names(str, Enum):
     ivan = 'ivan'
@@ -26,3 +27,13 @@ fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"
 @app.get('/query/')
 async def read_item(skip: int = 0, limit: int = 10):
     return fake_items_db[skip : skip + limit]
+
+class Para(BaseModel):
+    name: str
+    surname: str
+    description: str
+    gender: str
+
+@app.post("/para/")
+async def create_para(para: Para):
+    return para
