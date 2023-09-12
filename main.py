@@ -19,4 +19,10 @@ async def sum(var1: int, var2: int):
 @app.get('/names/{name}')
 async def get_name(name: Names):
     if name is Names.katya:
-        return {'name': }
+        return {'name': 'Katya'}
+
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}, {"item_name": "Konstantin"}]
+
+@app.get('/query/')
+async def read_item(skip: int = 0, limit: int = 10):
+    return fake_items_db[skip : skip + limit]
