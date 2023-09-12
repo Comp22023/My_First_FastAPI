@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from enum import Enum
 from pydantic import BaseModel
+
 
 class Names(str, Enum):
     ivan = 'ivan'
@@ -35,5 +36,7 @@ class Para(BaseModel):
     gender: str
 
 @app.post("/para/")
-async def create_para(para: Para):
-    return para
+async def create_para(surname = Form(), name=Form(), description=Form(), gender=Form()):
+    return {"surname": surname, "name": name, "description": description, "gender": gender}
+
+
