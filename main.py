@@ -2,12 +2,6 @@ from fastapi import FastAPI, Form
 from enum import Enum
 from pydantic import BaseModel
 
-
-class Names(str, Enum):
-    ivan = 'ivan'
-    katya = 'katya'
-    kostya = 'kostya'
-
 app = FastAPI()
 
 @app.get("/")
@@ -17,6 +11,11 @@ async def root():
 @app.get("/sum/{var1}/{var2}")
 async def sum(var1: int, var2: int):
     return {"Ваш номер билета": var1+var2}
+
+class Names(str, Enum):
+    ivan = 'ivan'
+    katya = 'katya'
+    kostya = 'kostya'
 
 @app.get('/names/{name}')
 async def get_name(name: Names):
@@ -36,7 +35,5 @@ class Para(BaseModel):
     gender: str
 
 @app.post("/para/")
-async def create_para(surname = Form(), name=Form(), description=Form(), gender=Form()):
+async def create_para(surname = Form(), name=Form(), description=Form(), gender=Form()): #Никогда так не делать
     return {"surname": surname, "name": name, "description": description, "gender": gender}
-
-
